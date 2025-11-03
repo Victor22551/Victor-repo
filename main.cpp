@@ -104,13 +104,13 @@ int buildEncodingTree(int nextFree) {
     //    - Create a new parent node with combined weight
     leftArr[nextFree] = a;
     rightArr[nextFree] = b;
-    weightArr[nextFree] = weight[a] + weight[b];
+    weightArr[nextFree] = weightArr[a] + weightArr[b];
     charArr[nextFree]   = '\0';
     //    - Set left/right pointers
     //    - Push new parent index back into the heap
      h.push(nextFree, weightArr);
     nextFree++;
-
+    }
     // 4. Return the index of the last remaining node (root)
         int root = h.pop(weightArr);
 return root;
@@ -124,11 +124,23 @@ void generateCodes(int root, string codes[]) {
     stack<pair<int, string>> st;
     st.push(root, "");
     while(!st.empty()) {
-        pair<int, string > current = st.top();
-        st,pop();
+        auto cur = st.top();
+        st.pop();
+        int node = cur.first;
+        string code = cur.second;
+        
+       
         
     // Left edge adds '0', right edge adds '1'.
-        
+        if(leftArr[node] == -1 && rightArr[node] == -1) { // check for no children {
+            if (code.empty()) code = "0";
+            codes[charArr[node] - 'a' ] = code; // Record code when a leaf node is reached.
+
+        } else { 
+         if (rightArr[node] != -1)
+                st.push({rightArr[node], code + "1" });
+         if (leftArr[node] != -1)
+                st.push ({leftArr[node], code + "0"});
     // Record code when a leaf node is reached.
 }
 
