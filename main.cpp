@@ -121,7 +121,14 @@ return root;
 void generateCodes(int root, string codes[]) {
     // TODO:
     // Use stack<pair<int, string>> to simulate DFS traversal.
+    stack<pair<int, string>> st;
+    st.push(root, "");
+    while(!st.empty()) {
+        pair<int, string > current = st.top();
+        st,pop();
+        
     // Left edge adds '0', right edge adds '1'.
+        
     // Record code when a leaf node is reached.
 }
 
